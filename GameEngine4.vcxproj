@@ -142,13 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Core\Debug.cpp" />
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
+    <ClCompile Include="Engine\Core\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Core\Debug.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Window.h" />
+    <ClInclude Include="Engine\Core\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

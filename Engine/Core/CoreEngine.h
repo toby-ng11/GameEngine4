@@ -1,8 +1,9 @@
 #ifndef COREENGINE_H
 #define COREENGINE_H
 
-#include "Window.h"
 #include <memory>
+#include "Window.h"
+#include "Timer.h"
 
 class CoreEngine
 {
@@ -36,6 +37,9 @@ private:
 	Window* window;
 
 	bool isRunning; 
+
+	Timer timer;
+	unsigned int fps;
 };
 
 #endif // !COREENGINE_H
