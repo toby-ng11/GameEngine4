@@ -4,6 +4,7 @@
 #include <memory>
 #include "Window.h"
 #include "Timer.h"
+#include "Debug.h"
 
 class CoreEngine
 {

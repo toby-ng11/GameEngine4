@@ -20,6 +20,7 @@ CoreEngine* CoreEngine::GetInstance()
 
 bool CoreEngine::OnCreate(string name_, int width_, int height_)
 {
+	Debug::OnCreate();
 	window = new Window(); // intialize window ptr
 	// check if Window creation is ok
 	if (!window->OnCreate(name_, width_, height_)) {
@@ -27,6 +28,8 @@ bool CoreEngine::OnCreate(string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning = false;
 	}
+	//                            full file path
+	Debug::Info("Everything worked", __FILE__, __LINE__); // dynamic macro
 	timer.Start();
 	return isRunning = true;
 }
