@@ -33,8 +33,7 @@ private:
 	unsigned int currentTicks;
 };
 
-
-#endif // !
+#endif // !TIMER_H
 
 
 
