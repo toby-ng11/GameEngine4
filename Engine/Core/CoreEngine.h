@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Timer.h"
 #include "Debug.h"
+#include "GameInterface.h"
 
 class CoreEngine
 {
@@ -24,6 +25,9 @@ public:
 	// Return running variable value
 	bool GetIsRunning();
 
+	void SetGameInterface(GameInterface* gameInterface_);
+
+
 private:
 	CoreEngine();
 	~CoreEngine();
@@ -41,6 +45,8 @@ private:
 
 	Timer timer;
 	unsigned int fps;
+
+	GameInterface* gameInterface;
 };
 
 #endif // !COREENGINE_H
