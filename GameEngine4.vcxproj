@@ -144,19 +144,23 @@
   <ItemGroup>
     <ClCompile Include="Engine\Core\Debug.cpp" />
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
-    <ClCompile Include="Engine\Core\GameInterface.cpp" />
+    <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Game1.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp" />
+    <ClCompile Include="Game\Scene\StartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Core\Debug.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
+    <ClInclude Include="Engine\Core\Scene.h" />
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\Core\Timer.h" />
     <ClInclude Include="Engine\Core\GameInterface.h" />
+    <ClInclude Include="Game\Scene\GameScene.h" />
     <ClInclude Include="Game\Game1.h" />
+    <ClInclude Include="Game\Scene\StartScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

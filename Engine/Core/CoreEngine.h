@@ -6,6 +6,7 @@
 #include "Timer.h"
 #include "Debug.h"
 #include "GameInterface.h"
+#include "Scene.h"
 
 class CoreEngine
 {
@@ -20,12 +21,15 @@ public:
 
 	// Create window
 	bool OnCreate(string name_, int width_, int height_);
-
 	void Run();
-	// Return running variable value
-	bool GetIsRunning();
+	void Exit();
+
+	// Getter
+	bool GetIsRunning()const;
+	int GetCurrentScene() const;
 
 	void SetGameInterface(GameInterface* gameInterface_);
+	void SetCurrentScene(int sceneNum_);
 
 
 private:
@@ -36,17 +40,19 @@ private:
 	void Render();
 	void OnDestroy();
 
-	static unique_ptr<CoreEngine> engineInstance; // hole pointer to this engine class
+	static unique_ptr<CoreEngine> engineInstance; // hold pointer to this engine class
 	friend default_delete<CoreEngine>; // delete unique_ptr by default (destructor)
 
 	Window* window;
 
 	bool isRunning; 
 
-	Timer timer;
+	Timer *timer;
 	unsigned int fps;
 
 	GameInterface* gameInterface;
+
+	int currentSceneNum;
 };
 
 #endif // !COREENGINE_H
