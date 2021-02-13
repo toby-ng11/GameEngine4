@@ -8,6 +8,8 @@
 #include "GameInterface.h"
 #include "Scene.h"
 
+#include "../Rendering/3D/GameObject.h"
+
 class CoreEngine
 {
 public:

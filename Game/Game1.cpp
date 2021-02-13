@@ -19,13 +19,6 @@ bool Game1::OnCreate()
 		return currentScene->OnCreate();
 	}
 	
-
-	/*if (CoreEngine::GetInstance()->GetCurrentScene() == 0) {
-		currentScene = new GameScene();
-		currentSceneNum = 1;
-		return currentScene->OnCreate();
-	}*/
-
 	cout << "Engine's scene is not initialized to 0" << endl;
 	return false;
 }

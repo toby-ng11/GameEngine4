@@ -2,7 +2,7 @@
 
 unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60),timer(nullptr), gameInterface(nullptr), currentSceneNum(0) {}
+CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0) {}
 
 CoreEngine::~CoreEngine()
 {
@@ -95,10 +95,13 @@ void CoreEngine::Update(const float deltaTime_)
 void CoreEngine::Render()
 {
 	//set screen to this color
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// clear color and depth bufffer bit
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// call game render
+	if (gameInterface) {
+		gameInterface->Render();
+	}
 	SDL_GL_SwapWindow(window->GetWindow());
 }
 

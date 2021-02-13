@@ -5,7 +5,7 @@
 int main(int argc, char* argv[]) {
 	CoreEngine::GetInstance()->SetGameInterface(new Game1());
 
-	if (!CoreEngine::GetInstance()->OnCreate("Game 258 Engine", 800, 600)) {
+	if (!CoreEngine::GetInstance()->OnCreate("Game 258 Engine", 800, 800)) {
 		cout << "Engine failed to initialize" << endl;
 		return 0;
 	}
