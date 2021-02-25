@@ -29,6 +29,10 @@ bool CoreEngine::OnCreate(string name_, int width_, int height_)
 		return isRunning = false;
 	}
 
+	ShaderHandler::GetInstance()->CreateProgram("colourShader",
+		"Engine/Shaders/ColourVertexShader.glsl",
+		"Engine/Shaders/ColourFragmentShader.glsl");
+
 	if (gameInterface) { 
 		if (!gameInterface->OnCreate()) {
 			cout << "Game failed to initialize" << endl;
@@ -95,7 +99,7 @@ void CoreEngine::Update(const float deltaTime_)
 void CoreEngine::Render()
 {
 	//set screen to this color
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// clear color and depth bufffer bit
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// call game render
@@ -107,6 +111,8 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	ShaderHandler::GetInstance()->OnDestroy();
+
 	delete gameInterface;
 	gameInterface = nullptr;
 

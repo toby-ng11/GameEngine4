@@ -6,7 +6,7 @@
 class Model
 {
 public:
-	Model();
+	Model(GLuint shaderProgram_);
 	~Model();
 
 	void Render();
@@ -14,6 +14,7 @@ public:
 
 private:
 	vector<Mesh*> meshes; // pass by ptr
+	GLuint shaderProgram;
 };
 
 #endif // !MODEL_H
