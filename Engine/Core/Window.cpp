@@ -34,7 +34,7 @@ bool Window::OnCreate(string name_, int width_, int height_)
 		cout << "Failed to initialize GLEW" << endl;
 		return false;
 	}
-	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
+	
 	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
 	return true;
 }

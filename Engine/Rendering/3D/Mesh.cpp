@@ -1,9 +1,10 @@
 #include "Mesh.h"
 
 //                                                                    emty vector
-Mesh::Mesh(vector<Vertex>& vertexList_) : VAO(0), VBO(0), vertexList(vector<Vertex>())
+Mesh::Mesh(vector<Vertex>& vertexList_, GLuint shaderProgram_) : VAO(0), VBO(0), vertexList(vector<Vertex>()), shaderProgram(0)
 {
 	vertexList = vertexList_;
+	shaderProgram = shaderProgram_;
 	GenerateBuffers();
 }
 
@@ -16,10 +17,17 @@ Mesh::~Mesh()
 	vertexList.clear();
 }
 
-void Mesh::Render()
+void Mesh::Render(mat4 transform_)
 {
 	glBindVertexArray(VAO);
+	
+	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
 
+    //                 location, number of uniform, tranpose matrix?, ref to matrix
+	glUniformMatrix4fv(modelLoc,         1,             GL_FALSE,     value_ptr(transform_));
+
+	// setting uniform before draw arrays
+	
 	glDrawArrays(GL_TRIANGLES, 0, vertexList.size());
 	
 	glBindVertexArray(0);
@@ -53,4 +61,7 @@ void Mesh::GenerateBuffers()
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// Get location from the beginning
+	modelLoc = glGetUniformLocation(shaderProgram, "model");
 }
