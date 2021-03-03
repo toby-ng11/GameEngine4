@@ -1,7 +1,8 @@
 #include "Mesh.h"
 
 //                                                                    emty vector
-Mesh::Mesh(vector<Vertex>& vertexList_, GLuint shaderProgram_) : VAO(0), VBO(0), vertexList(vector<Vertex>()), shaderProgram(0)
+Mesh::Mesh(vector<Vertex>& vertexList_, GLuint shaderProgram_) : VAO(0), VBO(0), vertexList(vector<Vertex>()), shaderProgram(0),
+modelLoc(0), viewLoc(0), projectionLoc(0)
 {
 	vertexList = vertexList_;
 	shaderProgram = shaderProgram_;
@@ -17,14 +18,16 @@ Mesh::~Mesh()
 	vertexList.clear();
 }
 
-void Mesh::Render(mat4 transform_)
+void Mesh::Render(Camera* camera_, mat4 transform_)
 {
 	glBindVertexArray(VAO);
 	
 	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
 
-    //                 location, number of uniform, tranpose matrix?, ref to matrix
+    //                 location,  number of uniform, tranpose matrix?,   ref to matrix
 	glUniformMatrix4fv(modelLoc,         1,             GL_FALSE,     value_ptr(transform_));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(camera_->GetView()));
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(camera_->GetPerspective()));
 
 	// setting uniform before draw arrays
 	
@@ -64,4 +67,6 @@ void Mesh::GenerateBuffers()
 
 	// Get location from the beginning
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
+	viewLoc = glGetUniformLocation(shaderProgram, "view");
+	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 }

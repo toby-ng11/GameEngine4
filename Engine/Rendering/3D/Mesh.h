@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../../Camera/Camera.h"
+
 using namespace std;
 using namespace glm;
 
@@ -23,14 +25,14 @@ public:
 	Mesh(vector<Vertex>& vertexList_,GLuint shaderProgram_); // passing by ref
 	~Mesh();
 
-	void Render(mat4 transform_);
+	void Render(Camera* camera_, mat4 transform_);
 
 private:
 	void GenerateBuffers();
 	GLuint VAO, VBO; // VAO = Vertex Array Object, VBO = Vertex Buffer Object
 	vector<Vertex> vertexList;
 	GLuint shaderProgram;
-	GLuint modelLoc;
+	GLuint modelLoc, viewLoc, projectionLoc;
 };
 
 #endif // !MESH_H

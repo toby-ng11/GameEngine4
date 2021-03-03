@@ -14,7 +14,7 @@ public:
 		vec3 scale_ = vec3(1.0f));
 	~Model();
 
-	void Render();
+	void Render(Camera* camera_);
 	void AddMesh(Mesh* mesh_);
 
 	// Return matrix position

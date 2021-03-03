@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window() :window(nullptr), context(nullptr) {}
+Window::Window() :window(nullptr), context(nullptr), height(0), width(0) {}
 
 Window::~Window()
 {
@@ -36,6 +36,10 @@ bool Window::OnCreate(string name_, int width_, int height_)
 	}
 	
 	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
+
+	// transform clip space -> screen space
+	glViewport(0, 0, width, height);
+
 	return true;
 }
 
