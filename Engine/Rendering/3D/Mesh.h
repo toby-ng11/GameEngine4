@@ -22,7 +22,7 @@ class Mesh
 public:
 
 	// Constructor
-	Mesh(vector<Vertex>& vertexList_,GLuint shaderProgram_); // passing by ref
+	Mesh(vector<Vertex>& vertexList_,GLuint textureID_, GLuint shaderProgram_); // passing by ref
 	~Mesh();
 
 	void Render(Camera* camera_, mat4 transform_);
@@ -32,7 +32,10 @@ private:
 	GLuint VAO, VBO; // VAO = Vertex Array Object, VBO = Vertex Buffer Object
 	vector<Vertex> vertexList;
 	GLuint shaderProgram;
-	GLuint modelLoc, viewLoc, projectionLoc;
+	GLuint textureID;
+	GLuint modelLoc, viewLoc, projectionLoc, textureLoc;
+
+	GLuint viewPos, lightPosLoc, ambientLoc, diffuseLoc, specularLoc, colourLoc;
 };
 
 #endif // !MESH_H

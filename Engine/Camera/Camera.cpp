@@ -6,7 +6,7 @@ fieldOfView(0.0f),
 forward(vec3()), up(vec3()), right(vec3()), worldUp(vec3()), 
 nearPlane(0.0f), farPlane(0.0f),
 yaw(0.0f), pitch(0.0f),
-perspective(mat4()), orthographic(mat4()), view(mat4())
+perspective(mat4()), orthographic(mat4()), view(mat4()), lightList(vector<LightSource*>())
 {
     fieldOfView = 45.0f;
     forward = vec3(0.0f, 0.0f, -1.0f);
@@ -26,6 +26,7 @@ perspective(mat4()), orthographic(mat4()), view(mat4())
 
 Camera::~Camera()
 {
+    lightList.clear();
 }
 
 void Camera::SetPosition(vec3 position_)
@@ -60,6 +61,18 @@ vec3 Camera::GetPosition() const
 {
     return position;
 }
+
+void Camera::AddLight(LightSource* light_)
+{
+    lightList.push_back(light_);
+}
+
+vector<LightSource*> Camera::GetLightList()
+{
+    return lightList;
+}
+
+
 
 void Camera::UpdateCameraVector()
 {
