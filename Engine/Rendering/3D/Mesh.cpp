@@ -1,11 +1,10 @@
 #include "Mesh.h"
 
-//                                                                    emty vector
-Mesh::Mesh(vector<Vertex>& vertexList_,GLuint textureID_, GLuint shaderProgram_) : VAO(0), VBO(0), vertexList(vector<Vertex>()), shaderProgram(0), textureID(0),
-modelLoc(0), viewLoc(0), projectionLoc(0), textureLoc(0)
+Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0),
+modelLoc(0), viewLoc(0), projectionLoc(0), textureLoc(0),
+viewPosLoc(0), lightPosLoc(0), lightAmbientLoc(0), lightDiffuseLoc(0), lightSpecularLoc(0), lightColourLoc(0)
 {
-	vertexList = vertexList_;
-	textureID = textureID_;
+	subMesh = subMesh_;
 	shaderProgram = shaderProgram_;
 	GenerateBuffers();
 }
@@ -16,46 +15,66 @@ Mesh::~Mesh()
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 
-	vertexList.clear();
+	subMesh.vertexList.clear();
+	subMesh.meshIndices.clear();
 }
 
-void Mesh::Render(Camera* camera_, mat4 transform_)
+void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 {
 	// use texture0 (unit number of 0)
 	glUniform1i(textureLoc, 0); // assign uniform var to texture0
 	glActiveTexture(GL_TEXTURE0); 
-	glBindTexture(GL_TEXTURE_2D, textureID);
+	glBindTexture(GL_TEXTURE_2D, subMesh.textureID);
 
-	glBindVertexArray(VAO);
-	
-	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
-
-    //                 location / number of uniform / tranpose matrix? / ref to matrix
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(transform_));;
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(camera_->GetView()));
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(camera_->GetPerspective()));
-
-	glUniform3fv(viewPos, 1, value_ptr(camera_->GetPosition()));
+	glUniform3fv(viewPosLoc, 1, value_ptr(camera_->GetPosition()));
 
 	vector<LightSource*> newlight = camera_->GetLightList();
 
-	vec3 light_pos = newlight[0]->GetPosition();
-	float light_ambient = newlight[0]->GetAmbient();
-	float light_diff = newlight[0]->GetDiffuse();
-	float light_spec = newlight[0]->GetSpecular();
-	vec3 light_color = newlight[0]->GetColour();
-	
-	glUniform3fv(lightPosLoc, 1, value_ptr(light_pos));
-	glUniform1fv(ambientLoc, 1, &light_ambient);
-	glUniform1fv(diffuseLoc, 1, &light_diff);
-	glUniform1fv(specularLoc, 1, &light_spec);
-	glUniform3fv(colourLoc, 1, value_ptr(light_color));
+	vec3 light_pos1 = newlight[0]->GetPosition();
+	float light_ambient1 = newlight[0]->GetAmbient();
+	float light_diff1 = newlight[0]->GetDiffuse();
+	float light_spec1 = newlight[0]->GetSpecular();
+	vec3 light_color1 = newlight[0]->GetColour();
 
-	// setting uniform before draw arrays
+	glUniform3fv(lightPosLoc, 1, value_ptr(light_pos1));
+	glUniform1fv(lightAmbientLoc, 1, &light_ambient1);
+	glUniform1fv(lightDiffuseLoc, 1, &light_diff1);
+	glUniform1fv(lightSpecularLoc, 1, &light_spec1);
+	glUniform3fv(lightColourLoc, 1, value_ptr(light_color1));
+
+    //                 location / number of uniform / tranpose matrix? / ref to matrix
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(camera_->GetView()));
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(camera_->GetPerspective()));
+
+	glBindVertexArray(VAO);
+
+	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
+
+	for (int i = 0; i < instances_.size(); i++) {
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(instances_[i]));
+		glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
+	}
+
 	
-	glDrawArrays(GL_TRIANGLES, 0, vertexList.size());
+
+	/*vec3 light_pos2 = newlight[1]->GetPosition();
+	float light_ambient2 = newlight[1]->GetAmbient();
+	float light_diff2 = newlight[1]->GetDiffuse();
+	float light_spec2 = newlight[1]->GetSpecular();
+	vec3 light_color2 = newlight[1]->GetColour();
+
+	glUniform3fv(lightPosLoc, 1, value_ptr(light_pos2));
+	glUniform1fv(ambientLoc, 1, &light_ambient2);
+	glUniform1fv(diffuseLoc, 1, &light_diff2);
+	glUniform1fv(specularLoc, 1, &light_spec2);
+	glUniform3fv(colourLoc, 1, value_ptr(light_color2));*/
+	
+
+	// setting uniform before drawing arrays
+	
 	
 	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Mesh::GenerateBuffers()
@@ -65,7 +84,7 @@ void Mesh::GenerateBuffers()
 	glBindVertexArray(VAO); // bind VAO to GPU
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); // bind VBO to GPU as buffer
 	//            buffer type   / size of array = vector size*byte size of each vertex element                      
-	glBufferData(GL_ARRAY_BUFFER, vertexList.size() * sizeof(Vertex), &vertexList[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0], GL_STATIC_DRAW);
 
 	//POSITION
 	glEnableVertexAttribArray(0); // fisrt
@@ -94,10 +113,10 @@ void Mesh::GenerateBuffers()
 	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
 
 	// Light
-	viewPos = glGetUniformLocation(shaderProgram, "viewPosition");
+	viewPosLoc = glGetUniformLocation(shaderProgram, "viewPosition");
 	lightPosLoc = glGetUniformLocation(shaderProgram, "light.lightPos");
-	ambientLoc = glGetUniformLocation(shaderProgram, "light.ambient");
-	diffuseLoc = glGetUniformLocation(shaderProgram, "light.diffuse");
-	specularLoc = glGetUniformLocation(shaderProgram, "light.specular");
-	colourLoc = glGetUniformLocation(shaderProgram, "light.lightColor");
+	lightAmbientLoc = glGetUniformLocation(shaderProgram, "light.ambient");
+	lightDiffuseLoc = glGetUniformLocation(shaderProgram, "light.diffuse");
+	lightSpecularLoc = glGetUniformLocation(shaderProgram, "light.specular");
+	lightColourLoc = glGetUniformLocation(shaderProgram, "light.lightColor");
 }

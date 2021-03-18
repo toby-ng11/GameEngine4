@@ -21,7 +21,8 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->SetCamera(new Camera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(vec3(0.0f, 0.0f, 4.0f));
 
-	CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f, vec3(1.0f, 1.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(5.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f, vec3(1.0f, 1.0f, 1.0f)));
+	//CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(-5.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f, vec3(1.0f, 1.0f, 1.0f)));
 
 	TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Resources/Textures/CheckerboardTexture.png");
 
@@ -273,10 +274,11 @@ bool GameScene::OnCreate()
 		vertexList.push_back(v);
 	}
 
-
-
-	model = new Model(ShaderHandler::GetInstance()->GetShader("basicShader"));
-	model->AddMesh(new Mesh(vertexList, TextureHandler::GetInstance()->GetTexture("CheckerboardTexture"), ShaderHandler::GetInstance()->GetShader("basicShader")));
+	model = new Model("", "", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	SubMesh subMesh;
+	subMesh.vertexList = vertexList;
+	subMesh.textureID = TextureHandler::GetInstance()->GetTexture("CheckerboardTexture");
+	model->AddMesh(new Mesh(subMesh, ShaderHandler::GetInstance()->GetShader("basicShader")));
 	//model->SetScale(vec3(0.5f));
 	shape = new GameObject(model);
 
@@ -285,7 +287,8 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
-	model->SetAngle(model->GetAngle() + 0.005f);
+	//model->SetAngle(model->GetAngle() + 0.005f);
+	shape->Update(deltaTime_);
 }
 
 void GameScene::Render()

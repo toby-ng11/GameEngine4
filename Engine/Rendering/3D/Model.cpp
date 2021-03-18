@@ -1,14 +1,9 @@
 #include "Model.h"
 
-Model::Model(GLuint shaderProgram_, vec3 position_, float angle_, vec3 rotation_, vec3 scale_) :
-	meshes(vector<Mesh*>()), shaderProgram(0), position(vec3()), angle(0.0f), rotation(vec3(0.0f, 1.0f, 0.0f)), scale(vec3(1.0f))
+Model::Model(const string& objPath_, const string& matPth_, GLuint shaderProgram_) :
+	meshes(vector<Mesh*>()), shaderProgram(0), modelInstances(vector<mat4>())
 {
 	shaderProgram = shaderProgram_;
-
-	position = position_;
-	angle = angle_;
-	rotation = rotation_;
-	scale = scale_;
 }
 
 Model::~Model()
@@ -21,13 +16,17 @@ Model::~Model()
 		}
 		meshes.clear();
 	}
+
+	if (modelInstances.size() > 0) {
+		modelInstances.clear();
+	}
 }
 
 void Model::Render(Camera* camera_)
 {
 	glUseProgram(shaderProgram); 
 	for (auto m : meshes) {
-		m->Render(camera_, GetTransform());
+		m->Render(camera_, modelInstances);
 	}
 }
 
@@ -37,51 +36,34 @@ void Model::AddMesh(Mesh* mesh_)
 
 }
 
-vec3 Model::GetPosition() const
+unsigned int Model::CreateInstance(vec3 position_, float angle_, vec3 rotation_, vec3 scale_)
 {
-	return position;
+	modelInstances.push_back(CreateTransform(position_, angle_, rotation_, scale_)); // add new matrix
+	return modelInstances.size() - 1; // start at 0
 }
 
-float Model::GetAngle() const
+void Model::UpdateInstance(unsigned int index_, vec3 position_, float angle_, vec3 rotation_, vec3 scale_)
 {
-	return angle;
+	modelInstances[index_] = CreateTransform(position_, angle_, rotation_, scale_);
 }
 
-vec3 Model::GetRoation() const
+mat4 Model::GetTransform(unsigned int index_) const
 {
-	return rotation;
+	return modelInstances[index_];
 }
 
-vec3 Model::GetScale() const
-{
-	return scale;
-}
-
-void Model::SetPosition(vec3 position_)
-{
-	position = position_;
-}
-
-void Model::SetAngle(float angle_)
-{
-	angle = angle_;
-}
-
-void Model::SetRotation(vec3 rotation_)
-{
-	rotation = rotation_;
-}
-
-void Model::SetScale(vec3 scale_)
-{
-	scale = scale_;
-}
-
-mat4 Model::GetTransform() const
+mat4 Model::CreateTransform(vec3 postion_, float angle_, vec3 rotation_, vec3 scale_) const
 {
 	mat4 model;
-	model = translate(model, position);
-	model = rotate(model, angle, rotation);
-	model = glm::scale(model, scale); // duplicate "scale", must use scope
+	model = translate(model, postion_);
+	model = rotate(model, angle_, rotation_);
+	model = scale(model, scale_);
 	return model;
 }
+
+void Model::LoadModel()
+{
+}
+
+
+

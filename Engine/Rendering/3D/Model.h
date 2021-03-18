@@ -3,43 +3,36 @@
 
 #include "Mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <string>
 
 
 class Model
 {
 public:
-	Model(GLuint shaderProgram_, 
-		vec3 position_ = vec3(), float angle_ = 0.0f,
-		vec3 rotation_ = vec3(0.0f, 1.0f, 0.0f), 
-		vec3 scale_ = vec3(1.0f));
+	Model(const string& objPath_, const string& matPth_, GLuint shaderProgram_);
 	~Model();
 
 	void Render(Camera* camera_);
 	void AddMesh(Mesh* mesh_);
 
-	// Return matrix position
-	vec3 GetPosition() const;
-	// Return matrix angle
-	float GetAngle()const;
-	// Return matrix rotation
-	vec3 GetRoation() const;
-	// Return matrix scale
-	vec3 GetScale() const;
-
-	void SetPosition(vec3 position_);
-	void SetAngle(float angle_);
-	void SetRotation(vec3 rotation_);
-	void SetScale(vec3 scale_);
+	unsigned int CreateInstance(vec3 position_, float angle_, vec3 rotation_, vec3 scale_); // return number of the current/new instance
+    void UpdateInstance(unsigned int index_, vec3 position_, float angle_, vec3 rotation_, vec3 scale_);
+	
+	mat4 GetTransform(unsigned int index_) const;
 
 private:
 	vector<Mesh*> meshes; // pass by ptr
 	GLuint shaderProgram;
+	vector<mat4> modelInstances; // hold vector of all model matricies
 
-	vec3 position;
+	mat4 CreateTransform(vec3 postion_, float angle_, vec3 rotation_, vec3 scale_) const; // create model matrix
+	void LoadModel();
+
+	/*vec3 position;
 	float angle;
 	vec3 rotation;
-	vec3 scale;
-	mat4 GetTransform() const;
+	vec3 scale;*/
+	
 };
 
 #endif // !MODEL_H

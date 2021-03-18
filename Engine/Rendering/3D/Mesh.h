@@ -17,25 +17,31 @@ struct Vertex {
 	vec2 textureCoordinates;
 	vec3 colour;
 };
+
+struct SubMesh {
+	vector<Vertex> vertexList;
+	vector<unsigned int> meshIndices;
+	GLuint textureID;
+};
+
 class Mesh
 {
 public:
-
-	// Constructor
-	Mesh(vector<Vertex>& vertexList_,GLuint textureID_, GLuint shaderProgram_); // passing by ref
+	Mesh(SubMesh& subMesh_, GLuint shaderProgram_); // pass SubMesh by ref
 	~Mesh();
 
-	void Render(Camera* camera_, mat4 transform_);
+	void Render(Camera* camera_, vector<mat4>& instances_);
 
 private:
 	void GenerateBuffers();
 	GLuint VAO, VBO; // VAO = Vertex Array Object, VBO = Vertex Buffer Object
-	vector<Vertex> vertexList;
 	GLuint shaderProgram;
-	GLuint textureID;
-	GLuint modelLoc, viewLoc, projectionLoc, textureLoc;
+	
+	GLuint modelLoc, viewLoc, projectionLoc, textureLoc; // camera
 
-	GLuint viewPos, lightPosLoc, ambientLoc, diffuseLoc, specularLoc, colourLoc;
+	GLuint viewPosLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightSpecularLoc, lightColourLoc; // light
+
+	SubMesh subMesh;
 };
 
 #endif // !MESH_H
