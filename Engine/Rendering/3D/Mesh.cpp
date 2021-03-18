@@ -30,17 +30,27 @@ void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 
 	vector<LightSource*> newlight = camera_->GetLightList();
 
-	vec3 light_pos1 = newlight[0]->GetPosition();
 	float light_ambient1 = newlight[0]->GetAmbient();
 	float light_diff1 = newlight[0]->GetDiffuse();
 	float light_spec1 = newlight[0]->GetSpecular();
-	vec3 light_color1 = newlight[0]->GetColour();
 
-	glUniform3fv(lightPosLoc, 1, value_ptr(light_pos1));
+	glUniform3fv(lightPosLoc, 1, value_ptr(newlight[0]->GetPosition()));
 	glUniform1fv(lightAmbientLoc, 1, &light_ambient1);
 	glUniform1fv(lightDiffuseLoc, 1, &light_diff1);
 	glUniform1fv(lightSpecularLoc, 1, &light_spec1);
-	glUniform3fv(lightColourLoc, 1, value_ptr(light_color1));
+	glUniform3fv(lightColourLoc, 1, value_ptr(newlight[0]->GetColour()));
+
+	/* 
+	float light_ambient2 = newlight[1]->GetAmbient();
+	float light_diff2 = newlight[1]->GetDiffuse();
+	float light_spec2 = newlight[1]->GetSpecular();
+
+	glUniform3fv(lightPosLoc, 1, value_ptr(newlight[1]->GetPosition()));
+	glUniform1fv(ambientLoc, 1, &light_ambient2);
+	glUniform1fv(diffuseLoc, 1, &light_diff2);
+	glUniform1fv(specularLoc, 1, &light_spec2);
+	glUniform3fv(colourLoc, 1, value_ptr(newlight[1]->GetPosition()));
+	*/
 
     //                 location / number of uniform / tranpose matrix? / ref to matrix
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(camera_->GetView()));
@@ -55,23 +65,7 @@ void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 		glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
 	}
 
-	
-
-	/*vec3 light_pos2 = newlight[1]->GetPosition();
-	float light_ambient2 = newlight[1]->GetAmbient();
-	float light_diff2 = newlight[1]->GetDiffuse();
-	float light_spec2 = newlight[1]->GetSpecular();
-	vec3 light_color2 = newlight[1]->GetColour();
-
-	glUniform3fv(lightPosLoc, 1, value_ptr(light_pos2));
-	glUniform1fv(ambientLoc, 1, &light_ambient2);
-	glUniform1fv(diffuseLoc, 1, &light_diff2);
-	glUniform1fv(specularLoc, 1, &light_spec2);
-	glUniform3fv(colourLoc, 1, value_ptr(light_color2));*/
-	
-
 	// setting uniform before drawing arrays
-	
 	
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
