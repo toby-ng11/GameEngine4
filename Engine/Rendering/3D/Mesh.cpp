@@ -60,7 +60,7 @@ void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 
 	glEnable(GL_DEPTH_TEST); // take Z value of objects into account
 
-	for (int i = 0; i < instances_.size(); i++) {
+	for (unsigned int i = 0; i < instances_.size(); i++) {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(instances_[i]));
 		glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
 	}

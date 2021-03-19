@@ -21,7 +21,7 @@ struct Vertex {
 struct SubMesh {
 	vector<Vertex> vertexList;
 	vector<unsigned int> meshIndices;
-	GLuint textureID;
+	GLuint textureID = 0;
 };
 
 class Mesh

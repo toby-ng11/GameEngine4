@@ -1,15 +1,15 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <string>
+#include "LoadOBJModel.h"
 
 
 class Model
 {
 public:
-	Model(const string& objPath_, const string& matPth_, GLuint shaderProgram_);
+	Model(const string& objPath_, const string& matPath_, GLuint shaderProgram_);
 	~Model();
 
 	void Render(Camera* camera_);
@@ -24,6 +24,8 @@ private:
 	vector<Mesh*> meshes; // pass by ptr
 	GLuint shaderProgram;
 	vector<mat4> modelInstances; // hold vector of all model matricies
+	
+	LoadOBJModel* obj;
 
 	mat4 CreateTransform(vec3 postion_, float angle_, vec3 rotation_, vec3 scale_) const; // create model matrix
 	void LoadModel();
