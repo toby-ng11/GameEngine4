@@ -1,3 +1,3 @@
 [INFO]: Everything worked in: D:\Old Documents\Game Courses\Semester 4\GAME 258 Game Engines 4\GameEngine4\Engine\Core\CoreEngine.cpp on line: 50
 [INFO]: Creating GameScene in: GameScene.cpp on line: 19
-[ERROR]: Suface for texture ./Resources/Materials/Apple.mtl failed to be created in: TextureHandler.cpp on line: 46
+[ERROR]: Suface for texture ./Resources/Materials/hollow knight.mtl failed to be created in: TextureHandler.cpp on line: 46

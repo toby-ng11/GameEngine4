@@ -19,7 +19,7 @@ bool GameScene::OnCreate()
 	Debug::Info("Creating GameScene", "GameScene.cpp", __LINE__);
 
 	CoreEngine::GetInstance()->SetCamera(new Camera());
-	CoreEngine::GetInstance()->GetCamera()->SetPosition(vec3(0.0f, 0.0f, 4.0f));
+	CoreEngine::GetInstance()->GetCamera()->SetPosition(vec3(0.0f, 0.5f, 3.0f));
 
 	CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(5.0f, 0.0f, 2.0f), 0.2f, 0.8f, 0.6f, vec3(1.0f, 1.0f, 1.0f)));
 	//CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(-5.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f, vec3(1.0f, 1.0f, 1.0f)));
@@ -27,7 +27,7 @@ bool GameScene::OnCreate()
 	TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Resources/Textures/CheckerboardTexture.png");
 
 	// Load obj and material
-	model = new Model("./Resources/Models/Apple.obj", "./Resources/Materials/Apple.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	model = new Model("./Resources/Models/hollow knight.obj", "./Resources/Materials/hollow knight.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	shape = new GameObject(model);
 
 	return true;
