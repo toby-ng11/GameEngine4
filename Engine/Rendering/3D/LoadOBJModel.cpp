@@ -28,7 +28,7 @@ LoadOBJModel::~LoadOBJModel()
 
 void LoadOBJModel::LoadModel(const string& objFilePath_, const string& mtlFilePath_)
 {
-    LoadMaterial(mtlFilePath_);
+    LoadMaterialLibrary(mtlFilePath_);
     LoadModel(objFilePath_);
 }
 

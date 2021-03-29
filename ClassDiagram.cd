@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="CoreEngine">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AEQBAAQAAgAAAgBgCAACMAAEBCAAAAAIIhAggAAABAY=</HashCode>
+      <FileName>Engine\Core\CoreEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAABAAAIAAAIAAEAABIAAAAAAAEAAACABgAAACAAQA=</HashCode>
+      <FileName>Engine\Rendering\3D\Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAgAAAAAAAQCAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engine\Core\Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartScene" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAAABAAAAAAAAAACAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Game\Scene\StartScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameScene" Collapsed="true">
+    <Position X="4.75" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAABAAAAKAAAAAAABAAAAAIBAA=</HashCode>
+      <FileName>Game\Scene\GameScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameInterface" Collapsed="true">
+    <Position X="7.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAIAAAAAAAAAIAAACAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engine\Core\GameInterface.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game1" Collapsed="true">
+    <Position X="5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAAgAAAABEAAAACCAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Game\Game1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="1.25" Y="9.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAgABASAAQAAAQAgAIAAAAAECE1gAAQEBAgQggAA=</HashCode>
+      <FileName>Engine\Camera\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Window">
+    <Position X="6.75" Y="6.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAgAQAQAAAAABAASAAAAAIAAAADECAAAA=</HashCode>
+      <FileName>Engine\Core\Window.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mesh" Collapsed="true">
+    <Position X="9.75" Y="8.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAsAgAAEwAAQCAAAAAAAAAAAgEAAAARIAAAAEARA=</HashCode>
+      <FileName>Engine\Rendering\3D\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>QBQEAAAAACAAAAAAAECAIAACAAAAAwgAIBAAAgJIAAA=</HashCode>
+      <FileName>Engine\Rendering\3D\GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadOBJModel" Collapsed="true">
+    <Position X="5" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQEAAAQAAABAAAAAYgAIAQAAQAAAgAFAAEAAAAAA=</HashCode>
+      <FileName>Engine\Rendering\3D\LoadOBJModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShaderHandler" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQBACAAAAAAAEgAAAAAAAAABIAAAAAAAABgAAAgAAA=</HashCode>
+      <FileName>Engine\Graphics\ShaderHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureHandler" Collapsed="true">
+    <Position X="2.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAASAMAAAAAAAAAAEAQgBAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Engine\Graphics\TextureHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer">
+    <Position X="5.75" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQAAAAgIAAAAAAAAAAAAAAGgAEAEBAA=</HashCode>
+      <FileName>Engine\Core\Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Debug" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Debug::MessageType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Engine\Core\Debug.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAQAAAgAYAAAAAAABAAACgAABAAAAAgAEAAAAQ=</HashCode>
+      <FileName>Engine\Core\Debug.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

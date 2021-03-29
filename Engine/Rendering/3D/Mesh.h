@@ -15,7 +15,6 @@ struct Vertex {
 	vec3 position;
 	vec3 normal;
 	vec2 textureCoordinates;
-	vec3 colour;
 };
 
 struct SubMesh {

@@ -1,13 +1,13 @@
 #include "LightSource.h"
 
 LightSource::LightSource(vec3 position_, float ambient_, float diffuse_, float specular_, vec3 colour_) :
-    position(vec3(0.0f, 0.0f, 0.0f)), ambient(0.0f), diffuse(0.0f), specular(0.0f), colour(vec3(0.0f, 0.0f, 0.0f))
+    position(vec3()), ambient(0.0f), diffuse(0.0f), specular(0.0f), colour(vec3())
 {
-    position = position_;
-    ambient = ambient_;
-    diffuse = diffuse_;
-    specular = specular_;
-    colour = colour_;
+    SetPosition(position_);
+    SetAmbient(ambient_);
+    SetDiffuse(diffuse_);
+    SetSpecular(specular_);
+    SetColour(colour_);
 }
 
 LightSource::~LightSource()
