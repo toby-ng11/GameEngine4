@@ -18,12 +18,14 @@ public:
 	float GetAngle() const;
 	vec3 GetRoation() const;
 	vec3 GetScale() const;
+	string GetTag() const;
 
 	// Setter
 	void SetPosition(vec3 position_);
 	void SetAngle(float angle_);
 	void SetRotation(vec3 rotation_);
 	void SetScale(vec3 scale_);
+	void SetTag(string tag_);
 private:
 	Model* model;
 
@@ -33,6 +35,8 @@ private:
 	float angle;
 	vec3 rotation;
 	vec3 scale;
+
+	string tag;
 };
 
 #endif // !GAMEOBJECT_H

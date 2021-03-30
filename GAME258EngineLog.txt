@@ -1,2 +1,4 @@
 [INFO]: Everything worked in: D:\Old Documents\Game Courses\Semester 4\GAME 258 Game Engines 4\GameEngine4\Engine\Core\CoreEngine.cpp on line: 50
-[INFO]: Creating GameScene in: GameScene.cpp on line: 19
+[INFO]: Creating GameScene in: GameScene.cpp on line: 16
+[ERROR]: Cannot open MTL file: /Resources/Materials/Dice.mtl in: LoadOBJModel.cpp on line: 141
+[ERROR]: Cannot open MTL file: /Resources/Materials/Apple.mtl in: LoadOBJModel.cpp on line: 141

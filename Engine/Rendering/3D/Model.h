@@ -20,6 +20,8 @@ public:
 	
 	mat4 GetTransform(unsigned int index_) const;
 
+	GLuint GetShaderProgram() const;
+
 private:
 	vector<Mesh*> meshes; // pass by ptr
 	GLuint shaderProgram;
@@ -30,10 +32,6 @@ private:
 	mat4 CreateTransform(vec3 postion_, float angle_, vec3 rotation_, vec3 scale_) const; // create model matrix
 	void LoadModel();
 
-	/*vec3 position;
-	float angle;
-	vec3 rotation;
-	vec3 scale;*/
 	
 };
 

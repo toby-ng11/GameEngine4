@@ -158,6 +158,7 @@
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
+    <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Camera\Camera.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\FX\LightSource.h" />
     <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
+    <ClInclude Include="Engine\Rendering\SceneGraph.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
