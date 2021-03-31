@@ -2,7 +2,8 @@
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0),
 modelLoc(0), viewLoc(0), projectionLoc(0),
-viewPosLoc(0), lightPosLoc(0), lightAmbientLoc(0), lightDiffuseLoc(0), lightSpecularLoc(0), lightColourLoc(0)
+viewPosLoc(0), lightPosLoc(0), lightAmbientLoc(0), lightDiffuseLoc(0), lightSpecularLoc(0), lightColourLoc(0),
+matDiffuseMapLoc(0), matShininessLoc(0), matTransparencyLoc(0), matAmbientLoc(0), matDiffuseLoc(0), matSpecularLoc(0)
 {
 	subMesh = subMesh_;
 	shaderProgram = shaderProgram_;
@@ -21,7 +22,7 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 {
-	glUniform1i(matDiffuseMapLoc, subMesh.material.diffuseMap);
+	glUniform1f(matDiffuseMapLoc, subMesh.material.diffuseMap);
 
 	glUniform1f(matShininessLoc, subMesh.material.shininess);
 	glUniform1f(matTransparencyLoc, subMesh.material.transparency);
@@ -105,6 +106,7 @@ void Mesh::GenerateBuffers()
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 
 	// Material
+	
 	matDiffuseMapLoc = glGetUniformLocation(shaderProgram, "material.diffuseMap");
 	matShininessLoc = glGetUniformLocation(shaderProgram, "material.shininess");
 	matTransparencyLoc = glGetUniformLocation(shaderProgram, "material.transparency");
