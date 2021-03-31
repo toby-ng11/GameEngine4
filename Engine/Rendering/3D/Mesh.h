@@ -8,9 +8,12 @@
 
 #include "../../Camera/Camera.h"
 #include "../../Graphics/MaterialHandler.h"
+//#include "../../Core/CoreEngine.h"
 
 using namespace std;
 using namespace glm;
+
+//class CoreEngine; // forward declaration to get access camera's lights
 
 struct Vertex {
 	vec3 position;

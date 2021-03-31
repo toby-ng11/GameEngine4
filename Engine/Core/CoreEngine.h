@@ -17,6 +17,8 @@
 
 #include "../Camera/Camera.h"
 
+//class Mesh;
+
 class CoreEngine
 {
 public:
