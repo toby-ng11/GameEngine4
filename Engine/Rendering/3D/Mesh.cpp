@@ -2,7 +2,7 @@
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0),
 modelLoc(0), viewLoc(0), projectionLoc(0),
-viewPosLoc(0), lightPosLoc(0), lightAmbientLoc(0), lightDiffuseLoc(0), lightSpecularLoc(0), lightColourLoc(0),
+viewPosLoc(0), lightPosLoc(), lightAmbientLoc(), lightDiffuseLoc(), lightSpecularLoc(), lightColourLoc(),
 matDiffuseMapLoc(0), matShininessLoc(0), matTransparencyLoc(0), matAmbientLoc(0), matDiffuseLoc(0), matSpecularLoc(0)
 {
 	subMesh = subMesh_;
@@ -22,42 +22,25 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 {
-	glUniform1f(matDiffuseMapLoc, subMesh.material.diffuseMap);
-
-	glUniform1f(matShininessLoc, subMesh.material.shininess);
-	glUniform1f(matTransparencyLoc, subMesh.material.transparency);
-	glUniform3f(matAmbientLoc, subMesh.material.ambient.x, subMesh.material.ambient.y, subMesh.material.ambient.z);
-	glUniform3f(matDiffuseLoc, subMesh.material.diffuse.x, subMesh.material.diffuse.y, subMesh.material.diffuse.z);
-	glUniform3f(matSpecularLoc, subMesh.material.specular.x, subMesh.material.specular.y, subMesh.material.specular.z);
+	glUniform1uiv(matDiffuseMapLoc, 1, &subMesh.material.diffuseMap);
+	glUniform1fv(matShininessLoc, 1, &subMesh.material.shininess);
+	glUniform1fv(matTransparencyLoc,1, &subMesh.material.transparency);
+	glUniform3fv(matAmbientLoc, 1, value_ptr(subMesh.material.ambient));
+	glUniform3fv(matDiffuseLoc, 1, value_ptr(subMesh.material.diffuse));
+	glUniform3fv(matSpecularLoc, 1, value_ptr(subMesh.material.specular));
 
 	glActiveTexture(GL_TEXTURE0); 
 	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 
 	glUniform3fv(viewPosLoc, 1, value_ptr(camera_->GetPosition()));
 
-	vector<LightSource*> newlight = camera_->GetLightList();
-
-	float light_ambient1 = newlight[0]->GetAmbient();
-	float light_diff1 = newlight[0]->GetDiffuse();
-	float light_spec1 = newlight[0]->GetSpecular();
-
-	glUniform3fv(lightPosLoc, 1, value_ptr(newlight[0]->GetPosition()));
-	glUniform1fv(lightAmbientLoc, 1, &light_ambient1);
-	glUniform1fv(lightDiffuseLoc, 1, &light_diff1);
-	glUniform1fv(lightSpecularLoc, 1, &light_spec1);
-	glUniform3fv(lightColourLoc, 1, value_ptr(newlight[0]->GetColour()));
-
-	/* 
-	float light_ambient2 = newlight[1]->GetAmbient();
-	float light_diff2 = newlight[1]->GetDiffuse();
-	float light_spec2 = newlight[1]->GetSpecular();
-
-	glUniform3fv(lightPosLoc, 1, value_ptr(newlight[1]->GetPosition()));
-	glUniform1fv(ambientLoc, 1, &light_ambient2);
-	glUniform1fv(diffuseLoc, 1, &light_diff2);
-	glUniform1fv(specularLoc, 1, &light_spec2);
-	glUniform3fv(colourLoc, 1, value_ptr(newlight[1]->GetPosition()));
-	*/
+	for (unsigned int i = 0; i < camera_->GetLightList().size(); i++) {
+		glUniform3fv(lightPosLoc[i], 1, value_ptr(camera_->GetLightList()[i]->GetPosition()));
+		glUniform1f(lightAmbientLoc[i], camera_->GetLightList()[i]->GetAmbient());
+		glUniform1f(lightDiffuseLoc[i], camera_->GetLightList()[i]->GetDiffuse());
+		glUniform1f(lightSpecularLoc[i], camera_->GetLightList()[0]->GetSpecular());
+		glUniform3fv(lightColourLoc[i], 1, value_ptr(camera_->GetLightList()[i]->GetColour()));
+	}
 
     //                 location / number of uniform / tranpose matrix? / ref to matrix
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(camera_->GetView()));
@@ -106,7 +89,6 @@ void Mesh::GenerateBuffers()
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 
 	// Material
-	
 	matDiffuseMapLoc = glGetUniformLocation(shaderProgram, "material.diffuseMap");
 	matShininessLoc = glGetUniformLocation(shaderProgram, "material.shininess");
 	matTransparencyLoc = glGetUniformLocation(shaderProgram, "material.transparency");
@@ -114,12 +96,20 @@ void Mesh::GenerateBuffers()
 	matDiffuseLoc = glGetUniformLocation(shaderProgram, "material.diffuse");
 	matSpecularLoc = glGetUniformLocation(shaderProgram, "material.specular");
 	
+	// Camera
+	viewPosLoc = glGetUniformLocation(shaderProgram, "viewPosition");
 
 	// Light
-	viewPosLoc = glGetUniformLocation(shaderProgram, "viewPosition");
-	lightPosLoc = glGetUniformLocation(shaderProgram, "light.lightPos");
-	lightAmbientLoc = glGetUniformLocation(shaderProgram, "light.ambient");
-	lightDiffuseLoc = glGetUniformLocation(shaderProgram, "light.diffuse");
-	lightSpecularLoc = glGetUniformLocation(shaderProgram, "light.specular");
-	lightColourLoc = glGetUniformLocation(shaderProgram, "light.lightColor");
+	
+	lightPosLoc[0] = glGetUniformLocation(shaderProgram, "light[0].lightPos");
+	lightAmbientLoc[0] = glGetUniformLocation(shaderProgram, "light[0].ambient");
+	lightDiffuseLoc[0] = glGetUniformLocation(shaderProgram, "light[0].diffuse");
+	lightSpecularLoc[0] = glGetUniformLocation(shaderProgram, "light[0].specular");
+	lightColourLoc[0] = glGetUniformLocation(shaderProgram, "light[0].lightColor");
+
+	lightPosLoc[1] = glGetUniformLocation(shaderProgram, "light[1].lightPos");
+	lightAmbientLoc[1] = glGetUniformLocation(shaderProgram, "light[1].ambient");
+	lightDiffuseLoc[1] = glGetUniformLocation(shaderProgram, "light[1].diffuse");
+	lightSpecularLoc[1] = glGetUniformLocation(shaderProgram, "light[1].specular");
+	lightColourLoc[1] = glGetUniformLocation(shaderProgram, "light[1].lightColor");
 }
