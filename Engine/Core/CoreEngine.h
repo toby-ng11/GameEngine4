@@ -13,6 +13,7 @@
 
 #include "../Graphics/ShaderHandler.h"
 #include "../Graphics/TextureHandler.h"
+#include "../Graphics/MaterialHandler.h"
 
 #include "../Camera/Camera.h"
 

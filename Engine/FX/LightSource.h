@@ -35,13 +35,6 @@ public:
 
 };
 
-
-
-
-
-
-
-
 #endif // !LIGHTSOURCE_H
 
 

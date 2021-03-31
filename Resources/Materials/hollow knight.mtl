@@ -14,7 +14,6 @@ newmtl torso
 	Ni 1.5200
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd D:\Desktop\torso.png
 
 newmtl head
 	Kd 0.5000 0.5000 0.5000
@@ -29,7 +28,6 @@ newmtl head
 	Ni 1.5200
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd D:\Desktop\head.png
 
 newmtl eyes
 	Kd 0.5000 0.5000 0.5000
@@ -44,7 +42,6 @@ newmtl eyes
 	Ni 1.5200
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd D:\Desktop\eyes.png
 
 newmtl limbs
 	Kd 0.5000 0.5000 0.5000
@@ -59,7 +56,6 @@ newmtl limbs
 	Ni 1.5200
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd D:\Desktop\limbs.png
 
 newmtl nail
 	Kd 0.5000 0.5000 0.5000
@@ -74,4 +70,3 @@ newmtl nail
 	Ni 1.5200
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd D:\Desktop\nail.png

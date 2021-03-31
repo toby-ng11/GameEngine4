@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0),
-modelLoc(0), viewLoc(0), projectionLoc(0), textureLoc(0),
+modelLoc(0), viewLoc(0), projectionLoc(0),
 viewPosLoc(0), lightPosLoc(0), lightAmbientLoc(0), lightDiffuseLoc(0), lightSpecularLoc(0), lightColourLoc(0)
 {
 	subMesh = subMesh_;
@@ -21,10 +21,16 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 {
-	// use texture0 (unit number of 0)
-	glUniform1i(textureLoc, 0); // assign uniform var to texture0
+	glUniform1i(matDiffuseMapLoc, subMesh.material.diffuseMap);
+
+	glUniform1f(matShininessLoc, subMesh.material.shininess);
+	glUniform1f(matTransparencyLoc, subMesh.material.transparency);
+	glUniform3f(matAmbientLoc, subMesh.material.ambient.x, subMesh.material.ambient.y, subMesh.material.ambient.z);
+	glUniform3f(matDiffuseLoc, subMesh.material.diffuse.x, subMesh.material.diffuse.y, subMesh.material.diffuse.z);
+	glUniform3f(matSpecularLoc, subMesh.material.specular.x, subMesh.material.specular.y, subMesh.material.specular.z);
+
 	glActiveTexture(GL_TEXTURE0); 
-	glBindTexture(GL_TEXTURE_2D, subMesh.textureID);
+	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 
 	glUniform3fv(viewPosLoc, 1, value_ptr(camera_->GetPosition()));
 
@@ -97,7 +103,15 @@ void Mesh::GenerateBuffers()
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
-	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
+
+	// Material
+	matDiffuseMapLoc = glGetUniformLocation(shaderProgram, "material.diffuseMap");
+	matShininessLoc = glGetUniformLocation(shaderProgram, "material.shininess");
+	matTransparencyLoc = glGetUniformLocation(shaderProgram, "material.transparency");
+	matAmbientLoc = glGetUniformLocation(shaderProgram, "material.ambient");
+	matDiffuseLoc = glGetUniformLocation(shaderProgram, "material.diffuse");
+	matSpecularLoc = glGetUniformLocation(shaderProgram, "material.specular");
+	
 
 	// Light
 	viewPosLoc = glGetUniformLocation(shaderProgram, "viewPosition");

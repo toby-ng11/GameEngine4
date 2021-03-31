@@ -1,5 +1,5 @@
-#ifndef SCENEGRAPH
-#define SCENEGRAPH
+#ifndef SCENEGRAPH_H
+#define SCENEGRAPH_H
 
 #include <memory>
 #include <unordered_map>

@@ -29,9 +29,9 @@ bool CoreEngine::OnCreate(string name_, int width_, int height_)
 		return isRunning = false;
 	}
 
-	/*ShaderHandler::GetInstance()->CreateProgram("colourShader",
+	ShaderHandler::GetInstance()->CreateProgram("colourShader",
 		"Engine/Shaders/ColourVertexShader.glsl",
-		"Engine/Shaders/ColourFragmentShader.glsl");*/
+		"Engine/Shaders/ColourFragmentShader.glsl");
 
 	ShaderHandler::GetInstance()->CreateProgram("basicShader",
 		"Engine/Shaders/VertexShader.glsl",
@@ -137,6 +137,7 @@ void CoreEngine::OnDestroy()
 {
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
+	MaterialHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
 
 	delete gameInterface;
