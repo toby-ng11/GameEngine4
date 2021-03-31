@@ -23,7 +23,7 @@ struct Material {
 
 uniform vec3 viewPosition;
 uniform Material material;
-uniform Light light[2];
+uniform Light light[3];
 
 out vec4 fColour;
 
@@ -31,7 +31,7 @@ void main() {
 
     vec3 result;
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
 	  // Ambient
       vec3 ambient = light[i].ambient * material.ambient * texture(material.diffuseMap, TexCoords).rgb * light[i].lightColor;
 

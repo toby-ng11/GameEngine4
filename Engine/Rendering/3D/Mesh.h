@@ -42,7 +42,7 @@ private:
 	
 	GLuint modelLoc, viewLoc, projectionLoc; // camera
 
-	GLuint viewPosLoc, lightPosLoc[2], lightAmbientLoc[2], lightDiffuseLoc[2], lightSpecularLoc[2], lightColourLoc[2]; // light
+	GLuint viewPosLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightSpecularLoc, lightColourLoc; // light
 
 	SubMesh subMesh;
 
