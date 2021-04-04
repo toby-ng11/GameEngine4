@@ -8,7 +8,6 @@
 
 #include "../../Camera/Camera.h"
 #include "../../Graphics/MaterialHandler.h"
-//#include "../../Core/CoreEngine.h"
 
 using namespace std;
 using namespace glm;

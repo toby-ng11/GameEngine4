@@ -61,9 +61,7 @@ void CoreEngine::Run()
 		Render();
 		SDL_Delay(timer->GetSleepTime(fps));
 	}
-
-		OnDestroy();
-	
+	OnDestroy();
 }
 
 void CoreEngine::Exit()
