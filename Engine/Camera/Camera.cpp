@@ -21,7 +21,7 @@ perspective(mat4()), orthographic(mat4()), view(mat4()), lightList(vector<LightS
 
     orthographic = ortho(0.0f, CoreEngine::GetInstance()->GetScreenWidth(), 0.0f, CoreEngine::GetInstance()->GetScreenHeight(), -1.0f, 1.0f);
 
-    UpdateCameraVector();
+    UpdateCameraVectors();
 }
 
 Camera::~Camera()
@@ -32,14 +32,14 @@ Camera::~Camera()
 void Camera::SetPosition(vec3 position_)
 {
     position = position_;
-    UpdateCameraVector();
+    UpdateCameraVectors();
 }
 
 void Camera::SetRotation(float yaw_, float pitch_)
 {
     yaw = yaw_;
     pitch = pitch_;
-    UpdateCameraVector();
+    UpdateCameraVectors();
 }
 
 mat4 Camera::GetView() const
@@ -72,9 +72,40 @@ vector<LightSource*> Camera::GetLightList()
     return lightList;
 }
 
+void Camera::ProcessMouseMovement(vec2 offset_)
+{
+    offset_ *= 0.05f; // mouse sensitivity
 
+    yaw += offset_.x;
+    pitch += offset_.y;
 
-void Camera::UpdateCameraVector()
+    // 90 < pitch < 90
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+
+    // 0 <= yaw <= 360
+    if (yaw < 0.0f) {
+        yaw += 360.0f;
+    }
+    if (yaw > 360.0f) {
+        yaw -= 360.0f;
+    }
+    UpdateCameraVectors();
+}
+
+void Camera::ProcessMouseZoom(int y_)
+{
+    if (y_ < 0 || y_ > 0) { // y != 0
+        position += static_cast<float>(y_) * (forward * 2.0f); // 2.0f means zoom sensitivity
+    }
+    UpdateCameraVectors();
+}
+
+void Camera::UpdateCameraVectors()
 {
     forward.x = cos(radians(yaw)) * cos(radians(pitch));
     forward.y = sin(radians(pitch));

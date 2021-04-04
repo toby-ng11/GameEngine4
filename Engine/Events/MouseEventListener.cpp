@@ -38,18 +38,30 @@ void MouseEventListener::Update(SDL_Event e_)
 
 void MouseEventListener::NotifyOfMousePressed(int buttonType_)
 {
+	if (engineInstance) {
+		engineInstance->NotifyOfMousePressed(mouse, buttonType_);
+	}
 }
 
 void MouseEventListener::NotifyOfMouseReleased(int buttonType_)
 {
+	if (engineInstance) {
+		engineInstance->NotifyOfMouseReleased(mouse, buttonType_);
+	}
 }
 
 void MouseEventListener::NotifyOfMouseMove()
 {
+	if (engineInstance) {
+		engineInstance->NotifyOfMouseMove(mouse);
+	}
 }
 
 void MouseEventListener::NotifyOfMouseScroll(int y_)
 {
+	if (engineInstance) {
+		engineInstance->NotifyOfMouseScroll(y_);
+	}
 }
 
 ivec2 MouseEventListener::GetPreviousMousePosition()

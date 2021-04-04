@@ -5,6 +5,7 @@
 
 class EventListener
 {
+public:
 	EventListener(const EventListener&) = delete;
 	EventListener(EventListener&&) = delete;
 	EventListener& operator=(const EventListener&) = delete;

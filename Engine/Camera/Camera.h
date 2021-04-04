@@ -29,9 +29,13 @@ public:
 	void AddLight(LightSource* light_);
 	vector<LightSource*> GetLightList();
 
+	// Mouse
+	void ProcessMouseMovement(vec2 offset_);
+	void ProcessMouseZoom(int y_);
+
 
 private:
-	void UpdateCameraVector();
+	void UpdateCameraVectors();
 	vec3 position;
 	mat4 perspective, orthographic, view;
 	float fieldOfView;
