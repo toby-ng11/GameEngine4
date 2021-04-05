@@ -74,6 +74,8 @@ void LoadOBJModel::LoadModel(const string& filePath_)
     }
     string line;
 
+    float minX = 0, minY = 0, minZ = 0, maxX = 0, maxY = 0, maxZ = 0;
+
     while(getline(in, line)) {
 
         // VERTEX DATA
@@ -82,6 +84,17 @@ void LoadOBJModel::LoadModel(const string& filePath_)
             float x, y, z;
             v >> x >> y >> z;
             vertices.push_back(vec3(x, y, z));
+
+            if (x <= minX) minX = x;
+            if (y <= minY) minY = y;
+            if (z <= minZ) minZ = z;
+
+            if (x >= maxX) maxX = x;
+            if (y >= maxY) maxY = y;
+            if (z >= maxZ) maxZ = z;
+           
+            boundingBox.minVert = vec3(minX, minY, minZ);
+            boundingBox.maxVert = vec3(maxX, maxY, maxZ);
         }
 
         // VERTEX NORMALS

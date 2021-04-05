@@ -10,9 +10,7 @@ StartScene::~StartScene()
 
 bool StartScene::OnCreate()
 {
-	cout << " Start Scene" << endl;
 	CoreEngine::GetInstance()->SetCurrentScene(1);
-
 	return true;
 }
 

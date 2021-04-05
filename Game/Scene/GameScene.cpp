@@ -12,7 +12,7 @@ GameScene::~GameScene()
 
 bool GameScene::OnCreate()
 {
-	cout << "Game Scene" << endl;
+	cout << "You are in Game Scene" << endl;
 	Debug::Info("Creating GameScene", "GameScene.cpp", __LINE__);
 
 	CoreEngine::GetInstance()->SetCamera(new Camera());
