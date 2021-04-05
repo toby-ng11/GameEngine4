@@ -1,5 +1,4 @@
 #include "Mesh.h"
-//#include "../../Core/CoreEngine.h"
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0),
 modelLoc(0), viewLoc(0), projectionLoc(0),
@@ -124,8 +123,6 @@ void Mesh::GenerateBuffers()
 		lightDiffuseLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".diffuse").c_str());
 		lightSpecularLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".specular").c_str());
 		lightColourLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".lightColor").c_str());
-
-	}
+    }
 	*/
-	
 }

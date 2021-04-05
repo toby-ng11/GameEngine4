@@ -6,8 +6,7 @@
 class GameObject
 {
 public:
-	GameObject(Model* model_);
-	GameObject(Model* model_, vec3 position_);
+	GameObject(Model* model_, vec3 position_ = vec3());
 	~GameObject();
 
 	void Update(const float deltaTime_);
@@ -19,6 +18,8 @@ public:
 	vec3 GetRoation() const;
 	vec3 GetScale() const;
 	string GetTag() const;
+
+	BoundingBox GetBoundingBox() const;
 
 	// Setter
 	void SetPosition(vec3 position_);
@@ -37,6 +38,8 @@ private:
 	vec3 scale;
 
 	string tag;
+
+	BoundingBox boundingBox;
 };
 
 #endif // !GAMEOBJECT_H

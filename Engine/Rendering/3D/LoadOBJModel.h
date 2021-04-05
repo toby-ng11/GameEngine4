@@ -6,6 +6,8 @@
 
 #include "../../FX/MaterialLoader.h"
 
+#include "../../Math/BoundingBox.h"
+
 
 class LoadOBJModel
 {
@@ -15,6 +17,8 @@ public:
 
 	void LoadModel(const string& objFilePath_, const string& mtlFilePath_);
 	vector<SubMesh> GetSubMeshes();
+
+	BoundingBox GetBoundingBox() const;
 
 private:
 	void PostProcessing(); // get all data from obj into submesh obj
@@ -30,6 +34,8 @@ private:
 	vector<SubMesh> subMeshes;
 
 	Material currentMaterial;
+
+	BoundingBox boundingBox;
 
 };
 #endif // !LOADOBJMODEL_H

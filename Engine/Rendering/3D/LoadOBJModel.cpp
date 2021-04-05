@@ -37,6 +37,11 @@ vector<SubMesh> LoadOBJModel::GetSubMeshes()
     return subMeshes;
 }
 
+BoundingBox LoadOBJModel::GetBoundingBox() const
+{
+    return boundingBox;
+}
+
 void LoadOBJModel::PostProcessing()
 {
     for (unsigned int i = 0; i < indices.size(); i++) {

@@ -12,8 +12,6 @@
 using namespace std;
 using namespace glm;
 
-//class CoreEngine; // forward declaration to get access camera's lights
-
 struct Vertex {
 	vec3 position;
 	vec3 normal;

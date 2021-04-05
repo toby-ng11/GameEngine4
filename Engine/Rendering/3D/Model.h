@@ -22,6 +22,8 @@ public:
 
 	GLuint GetShaderProgram() const;
 
+	BoundingBox GetBoundingBox() const;
+
 private:
 	vector<Mesh*> meshes; // pass by ptr
 	GLuint shaderProgram;
@@ -32,6 +34,7 @@ private:
 	mat4 CreateTransform(vec3 postion_, float angle_, vec3 rotation_, vec3 scale_) const; // create model matrix
 	void LoadModel();
 
+	BoundingBox boundingBox;
 	
 };
 
