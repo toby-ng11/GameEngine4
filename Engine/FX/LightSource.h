@@ -32,10 +32,6 @@ public:
 	float GetDiffuse() const;
 	float GetSpecular()const;
 	vec3 GetColour() const;
-
 };
 
 #endif // !LIGHTSOURCE_H
-
-
-

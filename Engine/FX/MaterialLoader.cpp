@@ -2,7 +2,6 @@
 
 MaterialLoader::~MaterialLoader()
 {
-
 }
 
 void MaterialLoader::LoadMaterial(string filePath_)
@@ -17,7 +16,6 @@ void MaterialLoader::LoadMaterial(string filePath_)
 	string line;
 	float f, x, y, z;
 	while (getline(in, line)) {
-
 		// Material name (newmtl) -> Diffuse map
 		if (line.substr(0, 7) == "newmtl ") {
 			if (m.diffuseMap != 0) {

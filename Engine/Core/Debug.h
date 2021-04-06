@@ -24,7 +24,7 @@ public:
 	Debug(Debug&&) = delete;                   // ->
 	Debug& operator=(const Debug&) = delete;   // ->
 	Debug& operator=(Debug&&) = delete;        // Restrict using the copy & move constructor of this class
-	
+
 	// Do something when create window
 	static void OnCreate(const string& name_ = "GAME258EngineLog");
 	static void SetSeverity(MessageType type_);
@@ -35,9 +35,8 @@ public:
 	static void FatalError(const string message_, const string& fileName_, const int line_);
 
 private:
-	static void Log(const MessageType type_, const string& message_,const string& fileName_, const int line_);
+	static void Log(const MessageType type_, const string& message_, const string& fileName_, const int line_);
 	static MessageType currentSev;
 	static string outputName;
-
 };
 #endif // !DEBUG_H

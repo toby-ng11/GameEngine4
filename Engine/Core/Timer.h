@@ -10,7 +10,7 @@ class Timer
 {
 public:
 
-	Timer(const Timer &) = delete;             // ->
+	Timer(const Timer&) = delete;             // ->
 	Timer(Timer&&) = delete;                   // ->
 	Timer& operator=(const Timer&) = delete;   // ->
 	Timer& operator=(Timer&&) = delete;        // Restrict using the copy & move constructor of this class
@@ -34,6 +34,3 @@ private:
 };
 
 #endif // !TIMER_H
-
-
-

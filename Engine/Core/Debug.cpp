@@ -42,7 +42,7 @@ void Debug::FatalError(const string message_, const string& fileName_, const int
 	Log(MessageType::TYPE_INFO, "[FATAL ERROR]: " + message_, fileName_, line_);
 }
 
-void Debug::Log(const MessageType type_, const string& message_,const string& fileName_, const int line_)
+void Debug::Log(const MessageType type_, const string& message_, const string& fileName_, const int line_)
 {
 	if (type_ <= currentSev && currentSev > MessageType::TYPE_NONE) {
 		ofstream out;

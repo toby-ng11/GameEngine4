@@ -30,7 +30,7 @@ public:
 	void CreateTexture(const string& textureName_, const string& textureFilePath_);
 	const GLuint GetTexture(const string& textureName_);
 	const Texture* GetTextureData(const string textureName_);
-	
+
 private:
 	TextureHandler();
 	~TextureHandler();
@@ -38,19 +38,6 @@ private:
 	static unique_ptr<TextureHandler> textureInstance;
 	friend default_delete<TextureHandler>;
 	static vector<Texture*> textures;
-
-
-
-
-
-
-
-
-
-
 };
 
 #endif // !TEXTUREHANDLER_H
-
-
-

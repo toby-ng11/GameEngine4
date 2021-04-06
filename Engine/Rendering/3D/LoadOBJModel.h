@@ -8,7 +8,6 @@
 
 #include "../../Math/BoundingBox.h"
 
-
 class LoadOBJModel
 {
 public:
@@ -36,9 +35,5 @@ private:
 	Material currentMaterial;
 
 	BoundingBox boundingBox;
-
 };
 #endif // !LOADOBJMODEL_H
-
-
-

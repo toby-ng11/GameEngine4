@@ -15,4 +15,3 @@ public:
 private:
 };
 #endif // !GAMESCENE_H
-

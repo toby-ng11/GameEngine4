@@ -54,7 +54,7 @@ void TextureHandler::CreateTexture(const string& textureName_, const string& tex
 	int mode = surface->format->BytesPerPixel == 4 ? GL_RGBA : GL_RGB; // if byte/pixels = 4 then mode = GL_RGBA, else mode = GL_RGB
 
 	//           texture target  mipmap level   format to storing   width        height     zero    format of source image     <-data type     actual image data
-	glTexImage2D(GL_TEXTURE_2D,       0,               mode,       surface->w, surface->h,    0,             mode,            GL_UNSIGNED_BYTE, surface->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, mode, surface->w, surface->h, 0, mode, GL_UNSIGNED_BYTE, surface->pixels);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // S: X axis
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // T: Y axis
@@ -93,4 +93,3 @@ const Texture* TextureHandler::GetTextureData(const string textureName_)
 	}
 	return nullptr;
 }
-

@@ -2,7 +2,6 @@
 
 Game1::Game1() :GameInterface(), currentSceneNum(0), currentScene(nullptr)
 {
-
 }
 
 Game1::~Game1()
@@ -18,7 +17,7 @@ bool Game1::OnCreate()
 		currentSceneNum = 0;
 		return currentScene->OnCreate();
 	}
-	
+
 	cout << "Engine's scene is not initialized to 0" << endl;
 	return false;
 }

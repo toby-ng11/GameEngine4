@@ -6,7 +6,6 @@
 
 #include "../FX/LightSource.h"
 
-
 class Camera
 {
 public:
@@ -14,7 +13,7 @@ public:
 	~Camera();
 
 	// Setter
-	
+
 	void SetPosition(vec3 position_);
 	void SetRotation(float yaw_, float pitch_);
 
@@ -33,7 +32,6 @@ public:
 	void ProcessMouseMovement(vec2 offset_);
 	void ProcessMouseZoom(int y_);
 
-
 private:
 	void UpdateCameraVectors();
 	vec3 position;
@@ -47,5 +45,3 @@ private:
 };
 
 #endif // !CAMERA_H
-
-

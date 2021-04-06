@@ -15,7 +15,6 @@ CoreEngine* CoreEngine::GetInstance()
 		engineInstance.reset(new CoreEngine);
 	}
 	return engineInstance.get();
-
 }
 
 bool CoreEngine::OnCreate(string name_, int width_, int height_)
@@ -41,7 +40,7 @@ bool CoreEngine::OnCreate(string name_, int width_, int height_)
 		"Engine/Shaders/VertexShader.glsl",
 		"Engine/Shaders/FragmentShader.glsl");
 
-	if (gameInterface) { 
+	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			cout << "Game failed to initialize" << endl;
 			OnDestroy();
@@ -141,7 +140,6 @@ void CoreEngine::Update(const float deltaTime_)
 		gameInterface->Update(deltaTime_);
 		// << deltaTime_ << endl;
 	}
-	
 }
 
 void CoreEngine::Render()

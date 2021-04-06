@@ -27,7 +27,7 @@ float Timer::GetDeltaTime() const
 unsigned int Timer::GetSleepTime(const unsigned int fps_) const
 {
 	// sleeptime purpose is to maintain the consistence of framerate
-	unsigned int milliSecsPerFrame = MILLI_TO_SEC / fps_;
+	unsigned int milliSecsPerFrame = static_cast<unsigned int>(MILLI_TO_SEC) / fps_;
 
 	if (milliSecsPerFrame == 0) {
 		return 0;

@@ -40,16 +40,12 @@ private:
 	//Create Shader obj
 	GLuint CreateShader(GLenum shaderType_, const string& source_, const string& shaderName_);
 
-	// Hold all created shader programs 
+	// Hold all created shader programs
 	// In dictionary : WORD  has     DEFINITION
 	//                 KEY   has      VALUE
 	//                 STRING has     GLuint
 	//                    |           |
 	static unordered_map<string, GLuint> programs;
-
 };
 
 #endif // !SHADERHANDLER_H
-
-
-

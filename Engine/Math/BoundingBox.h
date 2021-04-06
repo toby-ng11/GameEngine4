@@ -24,6 +24,3 @@ struct BoundingBox
 };
 
 #endif // !BOUNDINGBOX_H
-
-
-

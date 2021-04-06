@@ -43,6 +43,3 @@ private:
 };
 
 #endif // !GAMEOBJECT_H
-
-
-

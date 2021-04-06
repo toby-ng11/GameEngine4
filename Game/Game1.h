@@ -5,7 +5,7 @@
 #include "Scene/StartScene.h"
 #include "Scene/GameScene.h"
 
-class Game1 :public GameInterface 
+class Game1 :public GameInterface
 {
 public:
 	Game1();
@@ -20,6 +20,4 @@ private:
 	void BuildScene();
 };
 
-
 #endif // !GAME1_H
-

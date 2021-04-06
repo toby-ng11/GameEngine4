@@ -14,8 +14,4 @@ public:
 	void Render()override;
 };
 
-
 #endif // !STARTSCENE_H
-
-
-

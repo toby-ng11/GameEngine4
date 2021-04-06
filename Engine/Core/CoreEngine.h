@@ -66,9 +66,9 @@ private:
 
 	Window* window;
 
-	bool isRunning; 
+	bool isRunning;
 
-	Timer *timer;
+	Timer* timer;
 	unsigned int fps;
 
 	GameInterface* gameInterface;
@@ -79,6 +79,3 @@ private:
 };
 
 #endif // !COREENGINE_H
-
-
-

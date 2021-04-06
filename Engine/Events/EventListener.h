@@ -18,6 +18,3 @@ public:
 };
 
 #endif // !EVENTLISTENER_H
-
-
-

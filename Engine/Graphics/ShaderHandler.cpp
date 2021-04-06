@@ -26,7 +26,7 @@ void ShaderHandler::CreateProgram(const string& shaderName_, const string& verte
 	if (vertexShader == 0 || fragmentShader == 0) {
 		return;
 	}
-	
+
 	// Create shader program
 	GLint linkResult = 0;
 	GLuint program = glCreateProgram();
@@ -122,8 +122,6 @@ GLuint ShaderHandler::CreateShader(GLenum shaderType_, const string& source_, co
 		string shaderString(shaderLog.begin(), shaderLog.end());
 		Debug::Error("Error compiling shader " + shaderName_ + ". Error: \n" + shaderString, "ShaderHandler.cpp", __LINE__);
 		return 0;
-
-
 	}
 	return shader;
 }

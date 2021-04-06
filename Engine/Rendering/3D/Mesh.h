@@ -36,7 +36,7 @@ private:
 	void GenerateBuffers();
 	GLuint VAO, VBO; // VAO = Vertex Array Object, VBO = Vertex Buffer Object
 	GLuint shaderProgram;
-	
+
 	GLuint modelLoc, viewLoc, projectionLoc; // camera
 
 	GLuint viewPosLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightSpecularLoc, lightColourLoc; // light
@@ -47,6 +47,3 @@ private:
 };
 
 #endif // !MESH_H
-
-
-

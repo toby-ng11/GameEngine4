@@ -11,7 +11,6 @@ using namespace std;
 using namespace glm;
 
 struct Material {
-
 	inline Material() :diffuseMap(0), shininess(32.0f), transparency(1.0f),
 		ambient(vec3(1.0f)), diffuse(vec3(1.0f)), specular(vec3(1.0f)),
 		name("") {}
@@ -54,5 +53,3 @@ private:
 };
 
 #endif // !MATERIALHANDLER
-
-

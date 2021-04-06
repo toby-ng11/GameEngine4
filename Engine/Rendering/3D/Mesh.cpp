@@ -10,7 +10,6 @@ matDiffuseMapLoc(0), matShininessLoc(0), matTransparencyLoc(0), matAmbientLoc(0)
 	GenerateBuffers();
 }
 
-
 Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1, &VAO);
@@ -25,12 +24,12 @@ void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 	// Material
 	glUniform1uiv(matDiffuseMapLoc, 1, &subMesh.material.diffuseMap);
 	glUniform1fv(matShininessLoc, 1, &subMesh.material.shininess);
-	glUniform1fv(matTransparencyLoc,1, &subMesh.material.transparency);
+	glUniform1fv(matTransparencyLoc, 1, &subMesh.material.transparency);
 	glUniform3fv(matAmbientLoc, 1, value_ptr(subMesh.material.ambient));
 	glUniform3fv(matDiffuseLoc, 1, value_ptr(subMesh.material.diffuse));
 	glUniform3fv(matSpecularLoc, 1, value_ptr(subMesh.material.specular));
 
-	glActiveTexture(GL_TEXTURE0); 
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 
 	// Camera
@@ -67,7 +66,7 @@ void Mesh::Render(Camera* camera_, vector<mat4>& instances_)
 	}
 
 	// setting uniform before drawing arrays
-	
+
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -78,14 +77,14 @@ void Mesh::GenerateBuffers()
 	glGenBuffers(1, &VBO); // create VBO
 	glBindVertexArray(VAO); // bind VAO to GPU
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); // bind VBO to GPU as buffer
-	//            buffer type   / size of array = vector size*byte size of each vertex element                      
+	//            buffer type   / size of array = vector size*byte size of each vertex element
 	glBufferData(GL_ARRAY_BUFFER, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0], GL_STATIC_DRAW);
 
 	//POSITION
 	glEnableVertexAttribArray(0); // fisrt
-	//                   lcation / size of vertex (vec3) / <-3 float values / normalize? /space between vertecies, 
-	glVertexAttribPointer(  0,             3,               GL_FLOAT,       GL_FALSE,      sizeof(Vertex),       (GLvoid*)0);
-	
+	//                   lcation / size of vertex (vec3) / <-3 float values / normalize? /space between vertecies,
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
+
 	//NORMAL
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
@@ -108,14 +107,13 @@ void Mesh::GenerateBuffers()
 	matAmbientLoc = glGetUniformLocation(shaderProgram, "material.ambient");
 	matDiffuseLoc = glGetUniformLocation(shaderProgram, "material.diffuse");
 	matSpecularLoc = glGetUniformLocation(shaderProgram, "material.specular");
-	
+
 	// Camera
 	viewPosLoc = glGetUniformLocation(shaderProgram, "viewPosition");
 
 	// Light
 	/*
 	for (unsigned int i = 0; i < CoreEngine::GetInstance()->GetCamera()->GetLightList().size(); i++) {
-
 		string lightIndex = "light[" + to_string(i) + "]";
 
 		lightPosLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".lightPos").c_str());
@@ -123,6 +121,6 @@ void Mesh::GenerateBuffers()
 		lightDiffuseLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".diffuse").c_str());
 		lightSpecularLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".specular").c_str());
 		lightColourLoc = glGetUniformLocation(shaderProgram, (lightIndex + ".lightColor").c_str());
-    }
+	}
 	*/
 }

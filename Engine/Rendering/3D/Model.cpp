@@ -29,7 +29,7 @@ Model::~Model()
 
 void Model::Render(Camera* camera_)
 {
-	glUseProgram(shaderProgram); 
+	glUseProgram(shaderProgram);
 	for (auto m : meshes) {
 		m->Render(camera_, modelInstances);
 	}
@@ -38,7 +38,6 @@ void Model::Render(Camera* camera_)
 void Model::AddMesh(Mesh* mesh_)
 {
 	meshes.push_back(mesh_);
-
 }
 
 unsigned int Model::CreateInstance(vec3 position_, float angle_, vec3 rotation_, vec3 scale_)
@@ -81,12 +80,9 @@ void Model::LoadModel()
 	for (unsigned int i = 0; i < obj->GetSubMeshes().size(); i++) {
 		meshes.push_back(new Mesh(obj->GetSubMeshes()[i], shaderProgram));
 	}
-	
+
 	boundingBox = obj->GetBoundingBox();
 
 	delete obj;
 	obj = nullptr;
 }
-
-
-

@@ -40,7 +40,4 @@ private:
 	static void UpdateMousePosition();
 };
 
-
 #endif // !MOUSEEVENTLISTENER_H
-
-

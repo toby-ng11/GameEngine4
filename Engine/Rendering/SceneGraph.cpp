@@ -13,7 +13,6 @@ SceneGraph::~SceneGraph()
 	OnDestroy();
 }
 
-
 SceneGraph* SceneGraph::GetInstance()
 {
 	if (sceneGraphInstance.get() == nullptr) {
@@ -100,4 +99,3 @@ void SceneGraph::Render(Camera* camera_)
 		}
 	}
 }
-

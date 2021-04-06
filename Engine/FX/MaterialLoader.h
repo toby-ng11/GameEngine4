@@ -23,5 +23,3 @@ private:
 };
 
 #endif // !MATERIALLOADER_H
-
-
