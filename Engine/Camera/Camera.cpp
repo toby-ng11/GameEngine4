@@ -62,6 +62,16 @@ vec3 Camera::GetPosition() const
 	return position;
 }
 
+float Camera::GetNearPlane()
+{
+	return nearPlane;
+}
+
+float Camera::GetFarPlane()
+{
+	return farPlane;
+}
+
 void Camera::AddLight(LightSource* light_)
 {
 	lightList.push_back(light_);

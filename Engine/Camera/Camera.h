@@ -24,6 +24,9 @@ public:
 	mat4 GetOrthographic()const;
 	vec3 GetPosition() const;
 
+	float GetNearPlane();
+	float GetFarPlane();
+
 	// Light
 	void AddLight(LightSource* light_);
 	vector<LightSource*> GetLightList();

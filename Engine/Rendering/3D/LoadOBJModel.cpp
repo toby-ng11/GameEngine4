@@ -74,7 +74,7 @@ void LoadOBJModel::LoadModel(const string& filePath_)
 	}
 	string line;
 
-	float minX = 0, minY = 0, minZ = 0, maxX = 0, maxY = 0, maxZ = 0;
+	float minX = FLT_MAX, minY = FLT_MAX, minZ = FLT_MAX, maxX = FLT_MIN, maxY = FLT_MIN, maxZ = FLT_MIN;
 
 	while (getline(in, line)) {
 		// VERTEX DATA

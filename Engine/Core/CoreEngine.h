@@ -24,6 +24,7 @@
 class CoreEngine
 {
 public:
+	// Singleton
 	CoreEngine(const CoreEngine&) = delete;
 	CoreEngine(CoreEngine&&) = delete;
 	CoreEngine& operator=(const CoreEngine&) = delete;
