@@ -2,6 +2,7 @@
 #define RAY_H
 
 #include "BoundingBox.h"
+#include "CollisionDetection.h"
 
 struct Ray
 {
@@ -33,7 +34,7 @@ struct Ray
 	// Check collision
 	inline bool IsColliding(BoundingBox* box_) {
 		intersectionDist = -1.0f;
-		return true;
+		return CollisionDetection::RayObbIntersection(this, box_);
 	}
 };
 
