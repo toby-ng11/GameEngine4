@@ -18,7 +18,7 @@ public:
 	CollisionDetection() = delete;
 	~CollisionDetection();
 
-	static Ray MousePosToWorldRay(vec2 mouseCoords_, vec2 screenSize_, Camera* camera_);
+	static Ray MousePosToWorldRay(vec2 mouseCoords_, float screenWidth_, float sreenHeight_, Camera* camera_);
 	static bool RayObbIntersection(Ray* ray_, BoundingBox* box_);
 };
 

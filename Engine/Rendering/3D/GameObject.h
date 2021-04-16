@@ -21,12 +21,17 @@ public:
 
 	BoundingBox GetBoundingBox() const;
 
+	bool GetHit() const;
+
 	// Setter
 	void SetPosition(vec3 position_);
 	void SetAngle(float angle_);
 	void SetRotation(vec3 rotation_);
 	void SetScale(vec3 scale_);
 	void SetTag(string tag_);
+
+	void SetHit(bool hit_, int buttonType_);
+
 private:
 	Model* model;
 
@@ -40,6 +45,8 @@ private:
 	string tag;
 
 	BoundingBox boundingBox;
+
+	bool hit;
 };
 
 #endif // !GAMEOBJECT_H
