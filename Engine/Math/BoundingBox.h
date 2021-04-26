@@ -29,7 +29,17 @@ struct BoundingBox
 		vec3 otherMinCorner = GetTransformedPoint(box_->minVert, box_->transform);
 		vec3 otherMaxCorner = GetTransformedPoint(box_->maxVert, box_->transform);
 
-		return true;
+		// check overlap in all 3 axes
+		if ((minCorner.x <= otherMaxCorner.x && maxCorner.x >= otherMinCorner.x) && 
+			(minCorner.y <= otherMaxCorner.y && maxCorner.y >= otherMinCorner.y) && 
+			(minCorner.z <= otherMaxCorner.z && maxCorner.z >= otherMinCorner.z))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 private:

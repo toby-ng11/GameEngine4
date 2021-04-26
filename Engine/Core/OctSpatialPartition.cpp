@@ -98,3 +98,114 @@ int OctNode::GetChillCount() const
 {
 	return childNum;
 }
+
+OctSpatialPartition::OctSpatialPartition(float worldSize_) :root(nullptr), rayIntersectionList(vector<OctNode*>())
+{
+	root = new OctNode(vec3(-(worldSize_ / 2.0f)), worldSize_, nullptr);
+	root->Octify(3); // depth lv 3
+	cout << "There are " << root->GetChillCount() << " child nodes." << endl;
+
+	rayIntersectionList.reserve(20);
+}
+
+OctSpatialPartition::~OctSpatialPartition()
+{
+	if (rayIntersectionList.size() > 0) {
+		for (auto cell : rayIntersectionList) {
+			cell = nullptr;
+		}
+		rayIntersectionList.clear();
+	}
+
+	delete root;
+	root = nullptr;
+}
+
+void OctSpatialPartition::AddObject(GameObject* obj_)
+{
+	AddObjectToCell(root, obj_);
+}
+
+GameObject* OctSpatialPartition::GetCollision(Ray ray_)
+{
+	if (rayIntersectionList.size() > 0) {
+		for (auto cell : rayIntersectionList) {
+			cell = nullptr;
+		}
+		rayIntersectionList.clear();
+	}
+	PrepareCollisionQuery(root, ray_);
+
+	GameObject* result = nullptr;
+	float shortestDistance = FLT_MAX;
+	for (auto cell : rayIntersectionList) { // for each node in list
+		for (auto obj : cell->objectList) { // for each game obj
+			BoundingBox tmp = obj->GetBoundingBox(); // requires l-value
+			if (ray_.IsColliding(&tmp)) {
+				if (ray_.intersectionDist < shortestDistance) {
+					result = obj;
+					shortestDistance = ray_.intersectionDist;
+				}
+			}
+		}
+		if (result != nullptr) {
+			return result;
+		}
+	}
+	return nullptr;
+}
+
+void OctSpatialPartition::AddObjectToCell(OctNode* cell_, GameObject* obj_)
+{
+	BoundingBox* nodeBound = cell_->GetBoundingBox();
+	BoundingBox objBound = obj_->GetBoundingBox();
+
+	// check cell_ is a leaf
+	if (cell_->IsLeaf()) {
+
+		// check if obj_.getboundingbox() Intersects with cell_.getboundingbox()
+		if (nodeBound->Intersects(&objBound)) {
+
+			// true -> add obj_ to that cell_
+			cell_->AddCollisionObject(obj_);
+
+			// print out specific obj_ was added to the cell_ pos
+			cout << "Added " << obj_->GetTag() << " to cell: " << to_string(nodeBound->maxVert) << endl; <-
+		}
+	}
+	// if cell_ is not a leaf
+	else {
+		// create for loop goes through each child of cell_
+		for (int i = 0; i < CHILDREN_NUMBER; i++) {
+
+			// call AddObjectToCell on each child
+			AddObjectToCell(cell_->GetChild(static_cast<OctChildren>(i)), obj_);
+		}
+	}
+}
+
+void OctSpatialPartition::PrepareCollisionQuery(OctNode* cell_, Ray ray_)
+{
+	BoundingBox* nodeBound = cell_->GetBoundingBox();
+
+	// check cell_ is a leaf
+	if (cell_->IsLeaf()) {
+
+		// check if ray_ isColiiding(cell_.getboundingbox())
+		if (ray_.IsColliding(nodeBound)) {
+
+			// true -> add cell_ to rayIntersectionList
+			rayIntersectionList.push_back(cell_);
+		}
+	}
+	// if not a leaf node
+	else {
+
+		// create for loop goes through each child of cell_
+		for (int i = 0; i < CHILDREN_NUMBER; i++) {
+
+			// call PrepareCollisionQuery on each child
+			PrepareCollisionQuery(cell_->GetChild(static_cast<OctChildren>(i)), ray_);
+		}
+	}
+}

@@ -20,7 +20,7 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(-10.0f, 0.0f, 0.0f), 0.1f, 0.5f, 0.5f, vec3(0.0f, 0.0f, 1.0f)));
 	CoreEngine::GetInstance()->GetCamera()->AddLight(new LightSource(vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f, vec3(1.0f, 1.0f, 1.0f)));
 
-	CollisionHandler::GetInstance()->OnCreate();
+	CollisionHandler::GetInstance()->OnCreate(100.0f);
 
 	Model* diceModel = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* appleModel = new Model("Resources/Models/Apple.obj", "Resources/Materials/Apple.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
@@ -32,9 +32,11 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, vec3(-3.5f, 0.0f, -2.0f)));
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, vec3(2.5f, 0.0f, 0.0f)), "Apple"); // "Apple" means tag
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, vec3(-2.0f, 0.0f, -2.0f)));
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, vec3(1.5f, 0.0f, 0.0f)), "Apple"); // "Apple" means tag
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(hollowknight, vec3(0.0f, 0.0f, -1.0f)), "hollow knight");
 
-	//diceModel = nullptr;
+	diceModel = nullptr;
 	appleModel = nullptr;
 	hollowknight = nullptr;
 

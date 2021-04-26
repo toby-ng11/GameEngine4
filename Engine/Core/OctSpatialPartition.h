@@ -21,7 +21,7 @@ class OctNode {
 public:
 	OctNode(vec3 position_, float size_, OctNode* parent_);
 	~OctNode();
-	
+
 	void Octify(int depth_);
 
 	OctNode* GetParent();
@@ -32,7 +32,10 @@ public:
 	bool IsLeaf() const; // check if node is a leaf or not
 	BoundingBox* GetBoundingBox() const; // get bounding box of the node
 	int GetChillCount() const; // get number of childs of a specific node
+
 private:
+	friend class OctSpatialPartition;
+
 	BoundingBox* octBounds;
 	OctNode* parent;
 	OctNode* children[CHILDREN_NUMBER];
@@ -41,6 +44,20 @@ private:
 	static int childNum;
 };
 
+class OctSpatialPartition {
+public:
+	OctSpatialPartition(float worldSize_);
+	~OctSpatialPartition();
+
+	void AddObject(GameObject* obj_);
+	GameObject* GetCollision(Ray ray_);
+
+private:
+	OctNode* root;
+	vector<OctNode*> rayIntersectionList;
+
+	void AddObjectToCell(OctNode* cell_, GameObject* obj_);
+	void PrepareCollisionQuery(OctNode* cell_, Ray ray_);
+};
+
 #endif // !OCTSPATIALPARTITION_H
-
-
