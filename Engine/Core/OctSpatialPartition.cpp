@@ -170,7 +170,7 @@ void OctSpatialPartition::AddObjectToCell(OctNode* cell_, GameObject* obj_)
 			cell_->AddCollisionObject(obj_);
 
 			// print out specific obj_ was added to the cell_ pos
-			cout << "Added " << obj_->GetTag() << " to cell: " << to_string(nodeBound->maxVert) << endl; <-
+			cout << "Added " << obj_->GetTag() << " to cell: " << to_string(nodeBound->maxVert) << endl; // <-
 		}
 	}
 	// if cell_ is not a leaf
